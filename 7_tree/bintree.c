@@ -86,6 +86,7 @@ void deleteBinTree(BinTree* pBinTree)
 		return ;
 	deleteBinTreeNode(pBinTree->pRootNode);
 	free(pBinTree);
+	pBinTree = NULL;
 }
 
 void deleteBinTreeNode(BinTreeNode* pNode)

@@ -37,7 +37,6 @@ int main()
 	pNode.data = 'M';
 	node[12] = insertRightChildNodeBT(node[6], pNode);
 
-
 	printf("전위 순회 : ");
 	preorderTraversalBinTree(node[0]);
 	printf("\n");

@@ -60,7 +60,8 @@ HeapNode *deleteHeapNode(ArrayHeap *pArrayHeap)//리턴값이 정확히 먼지 �
 	pReturn = (HeapNode *)malloc(sizeof(HeapNode));
 	*pReturn = pArrayHeap->pElement[1];
 
-	i = pArrayHeap->currentElementCount--;
+	i = pArrayHeap->currentElementCount;
+	pArrayHeap->currentElementCount--;
 	temp = &(pArrayHeap->pElement[i]);
 
 	parent = 1;
@@ -78,6 +79,7 @@ HeapNode *deleteHeapNode(ArrayHeap *pArrayHeap)//리턴값이 정확히 먼지 �
 		child *= 2;
 	}
 	pArrayHeap->pElement[parent] = *temp;
+	temp->key = 0;
 	return (pReturn);
 }
 
@@ -87,3 +89,5 @@ void deleteArrayHeap(ArrayHeap *pArrayHeap)
 		deleteHeapNode(pArrayHeap);
 	free(pArrayHeap);
 }
+
+
