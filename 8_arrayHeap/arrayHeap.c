@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+
+*/
+
 ArrayHeap *createArrayHeap(int maxElementCount)
 {
 	ArrayHeap *pArrayHeap;

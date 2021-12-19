@@ -1,19 +1,14 @@
 #include <stdio.h>
 #include "binsearchtree.h"
 
-typedef struct BinSearchTreeNodeType
-{
-	int key;
-	char value;
+/*
+key 는 유일
+root의 key는 왼쪽 서브트리의 어떠한 key보다도 크다
+삽입이 leaf에서만 일어난다.
+검색에 유리
 
-	struct BinSearchTreeNodeType* pLeftChild;
-	struct BinSearchTreeNodeType* pRightChild;
-} BinSearchTreeNode;
-
-typedef struct BinSearchTreeType
-{
-	BinSearchTreeNode *pRootNode;
-} BinSearchTree;
+inorder로 출력시 크기순으로 나온다.
+*/
 
 BinSearchTree* createBinSearchTree()
 {
