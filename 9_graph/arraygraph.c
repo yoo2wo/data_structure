@@ -3,15 +3,6 @@
 #include <string.h>
 #include "arraygraph.h"
 
-typedef struct ArrayGraphType
-{
-	int maxVertexCount;		// 최대 노드 개수
-	int currentVertexCount;	// 현재 사용되는 노드의 개수
-	int graphType;			// 그래프 종류: 1-Undirected, 2-Directed
-	int **ppAdjEdge;		// 간선 저장을 위한 2차원 array
-	int *pVertex;			// 노드 저장을 위한 1차원 array
-} ArrayGraph;
-
 // 그래프 생성
 ArrayGraph* createArrayGraph(int maxVertexCount)
 {
@@ -19,9 +10,6 @@ ArrayGraph* createArrayGraph(int maxVertexCount)
 
 	if (maxVertexCount <= 0)
 		return (NULL);
-	pGraph->maxVertexCount = maxVertexCount;
-	pGraph->graphType = 1;
-	pGraph->currentVertexCount = 0;
 	pGraph = (ArrayGraph *)malloc(sizeof(ArrayGraph));
 	pGraph->pVertex= (int *)malloc(sizeof(int) * maxVertexCount);
 	pGraph->ppAdjEdge = (int **)malloc(sizeof(int*) * maxVertexCount);
@@ -31,6 +19,9 @@ ArrayGraph* createArrayGraph(int maxVertexCount)
 		free(pGraph->ppAdjEdge);
 		return (NULL);
 	}
+	pGraph->maxVertexCount = maxVertexCount;
+	pGraph->graphType = GRAPH_UNDIRECTED;
+	pGraph->currentVertexCount = 0;
 	for(int i = 0; i < maxVertexCount; i++){
 		pGraph->ppAdjEdge[i] = (int *)malloc(sizeof(int) * maxVertexCount);
 		if (!pGraph->ppAdjEdge[i]){
@@ -44,6 +35,7 @@ ArrayGraph* createArrayGraph(int maxVertexCount)
 	for (int i=0; i < maxVertexCount; i++){
 		memset(pGraph->ppAdjEdge[i], 0, sizeof(int) * maxVertexCount);
 	}
+
 	return (pGraph);
 }
 
@@ -53,7 +45,8 @@ ArrayGraph* createArrayDirectedGraph(int maxVertexCount)
 
 	pGraph = createArrayGraph(maxVertexCount);
 	if (!pGraph)
-		pGraph->graphType = GRAPH_DIRECTED;
+		return (NULL);
+	pGraph->graphType = GRAPH_DIRECTED;
 	return (pGraph);
 }
 
@@ -108,7 +101,7 @@ int addEdgewithWeightAG(ArrayGraph* pGraph, int fromVertexID, int toVertexID, in
 	if (!checkVertexValid(pGraph, toVertexID))
 		return (FAIL);
 	pGraph->ppAdjEdge[fromVertexID][toVertexID] = weight;
-	if (pGraph->graphType == GRAPH_UNDIRECTED);
+	if (pGraph->graphType == GRAPH_UNDIRECTED)
 		pGraph->ppAdjEdge[toVertexID][fromVertexID] = weight;
 	return (SUCCESS);
 }
@@ -158,8 +151,8 @@ void displayArrayGraph(ArrayGraph* pGraph)
 {
 	if (!pGraph)
 		return ;
-	for(int i = 0; i < pGraph; i++){
-		for(int j = 0; j < pGraph; j++){
+	for(int i = 0; i < pGraph->maxVertexCount; i++){
+		for(int j = 0; j < pGraph->maxVertexCount; j++){
 			printf("%d ", pGraph->ppAdjEdge[i][j]);
 		}
 		printf("\n");

@@ -1,6 +1,8 @@
 #ifndef _GRAPH_ADJLIST_
 #define _GRAPH_ADJLIST_
 
+#include "linkedlist.h"
+
 typedef struct LinkedGraphType
 {
 	int maxVertexCount;		// 최대 노드 개수
