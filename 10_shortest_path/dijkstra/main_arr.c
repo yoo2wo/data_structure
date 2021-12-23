@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include "arraygraph.h"
 #define INF 1000
+/*
+다익스트라 : 하나의 정점에서 다른 모든 정점으로의 최단 경로
+플로이드 : 모든 정점에서 모든 정점으로의 최단 경로
 
+*/
 int getShortest(int *d, int *visit, ArrayGraph* pGraph)
 {
 	int min = INF;
@@ -51,10 +55,8 @@ void dijkstra(int start, ArrayGraph* pGraph)
 int main ()
 {
 	ArrayGraph* pGraph1;
-	int *d;
 
 	pGraph1 = createArrayGraph(6);
-
 
 	for(int i = 0; i < 6; i++){
 		addVertexAG(pGraph1, i);
