@@ -70,7 +70,6 @@ void kruscal(ArrayGraph* pGraph)
 	int i = 0;
 
 	pArrayHeap = createArrayHeap(EDGE_NUM);
-
 	for(int i = 0; i < pGraph->maxVertexCount; i++){
 		for(int j = 0; j < pGraph->maxVertexCount; j++){
 			if (pGraph->ppAdjEdge[i][j] != 0 && i <= j){
@@ -86,8 +85,7 @@ void kruscal(ArrayGraph* pGraph)
 	for(int i = 0; i < 6; i++){
 		addVertexAG(pGraph1, i);
 	}
-
-	while (i < EDGE_NUM){
+	while (i < EDGE_NUM){//minheap에서 하나씩 꺼내서 graph만든다. 사이클 생기면 엣지 삭제
 		node2 = deleteHeapNode(pArrayHeap);
 		node2->key = node2->key * -1; //maxheap을 사용해서
 		addEdgewithWeightAG(pGraph1, node2->from, node2->to, node2->key);
@@ -102,7 +100,6 @@ int main()
 {
 
 	ArrayGraph* pGraph1;
-
 	pGraph1 = createArrayGraph(6);
 
 	for(int i = 0; i < 6; i++){

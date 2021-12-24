@@ -25,14 +25,6 @@ void floyd(ArrayGraph* pGraph)
 		}
 	}
 
-	// for(int i = 0; i < NUMBER; i++){
-	// 	for(int j = 0; j < NUMBER; j++){
-	// 		printf("%d ",d[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
-
-	//k 는 거쳐가는 노드
 	for(int i = 0; i < NUMBER; i++){
 		for(int j = 0; j < NUMBER; j++){
 			for(int k = 0; k < NUMBER; k++){
